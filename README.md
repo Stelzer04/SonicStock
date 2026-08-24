@@ -1,1 +1,1 @@
-# SonicStock
+# BlueStock

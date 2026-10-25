@@ -1,0 +1,30 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('usuarios', 'Usuários', 'Cadastre e gerencie quem pode acessar o SonicStock') }}
+<div class="toolbar">
+    <input class="search" placeholder="⌕  Buscar por nome ou e-mail..." data-search>
+    <button class="btn" type="button" id="btn-novo-usuario">＋ Novo Usuário</button>
+</div>
+<section class="panel table-panel">
+    <table>
+        <thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Ações</th></tr></thead>
+        <tbody id="user-rows"><tr><td colspan="4" class="muted">Carregando...</td></tr></tbody>
+    </table>
+    <p class="muted" id="user-count"></p>
+</section>
+
+<dialog class="dlg" id="user-dialog">
+    <form id="user-form" method="dialog">
+        <h2 id="user-dialog-title">Novo usuário</h2>
+        <input type="hidden" name="id">
+        <label>Nome completo *<input name="nome" required maxlength="255" placeholder="Ex.: João da Silva"></label>
+        <label>E-mail *<input name="email" type="email" required maxlength="255" placeholder="nome@empresa.com"></label>
+        <label>Senha <small class="muted" id="user-password-hint">(obrigatória ao cadastrar)</small><input name="senha" type="password" minlength="6" placeholder="Mínimo de 6 caracteres"></label>
+        <label>Perfil *<select name="perfil" required><option value="FUNCIONARIO">Funcionário</option><option value="ADMINISTRADOR">Administrador</option></select></label>
+        <p class="error" id="user-form-error"></p>
+        <div class="dlg-actions">
+            <button type="button" class="secondary" data-close-dialog>Cancelar</button>
+            <button class="btn">Salvar usuário</button>
+        </div>
+    </form>
+</dialog>
+{{ end_shell() }}

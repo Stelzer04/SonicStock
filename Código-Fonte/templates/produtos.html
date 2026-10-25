@@ -1,0 +1,20 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('produtos', 'Produtos', 'Gerencie seu catálogo de produtos') }}
+<div class="toolbar">
+    <input class="search" placeholder="⌕  Buscar produtos..." data-search>
+    <select id="category"><option value="">Todas as categorias</option></select>
+    <select id="stock">
+        <option value="">Status do estoque</option>
+        <option value="low">Estoque baixo</option>
+        <option value="ok">Em estoque</option>
+    </select>
+    <a class="btn" href="{{ url_for('adicionar_produto') }}">＋ Adicionar Produto</a>
+</div>
+<section class="panel table-panel">
+    <table>
+        <thead><tr><th>Código</th><th>Nome do produto</th><th>Categoria</th><th>Fornecedor</th><th>Preço</th><th>Qtd.</th><th>Estoque mín.</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="product-rows"><tr><td colspan="9" class="muted">Carregando...</td></tr></tbody>
+    </table>
+    <p class="muted" id="product-count"></p>
+</section>
+{{ end_shell() }}

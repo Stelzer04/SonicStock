@@ -1,0 +1,24 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('entrada', 'Entrada de estoque', 'Registre a reposição ou o recebimento de produtos') }}
+<div class="stats two">
+    <article><span>Produto selecionado</span><strong class="stat-text" id="entry-product-stat">Nenhum</strong><small>Selecione um produto no formulário</small></article>
+    <article><span>Quantidade após entrada</span><strong id="entry-total-stat">—</strong><small>Estimativa baseada nos dados informados</small></article>
+</div>
+<form class="panel product-form" id="stock-entry-form">
+    <div class="panel-heading">
+        <div><h2>Dados da entrada</h2><p>Preencha os campos para registrar a movimentação.</p></div>
+        <small>* Campos obrigatórios</small>
+    </div>
+    <div class="form-grid">
+        <label class="span">Produto *<select required id="entry-product"><option value="">Selecione um produto</option></select></label>
+        <label>Quantidade recebida *<input required id="entry-quantity" type="number" min="1" step="1" placeholder="Ex.: 10"></label>
+        <label>Data e horário<input type="text" value="Preenchidos pelo sistema ao confirmar" disabled></label>
+        <label class="span">Observação<textarea rows="3" id="entry-notes" maxlength="500" placeholder="Ex.: Reposição do pedido de compra #123 (opcional)"></textarea></label>
+    </div>
+    <div class="form-actions">
+        <a class="secondary" href="{{ url_for('historico_movimentacoes') }}">Ver histórico</a>
+        <button type="reset" class="secondary">Limpar campos</button>
+        <button class="btn" type="submit">＋ Confirmar entrada</button>
+    </div>
+</form>
+{{ end_shell() }}

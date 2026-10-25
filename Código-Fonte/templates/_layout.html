@@ -1,0 +1,55 @@
+{% macro shell(active, title, subtitle) %}
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>{{ title }} | SonicStock</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <aside class="sidebar">
+            <a class="brand" href="{{ url_for('dashboard') }}">
+                <b>▦</b> SonicStock
+            </a>
+            <nav>
+                <a class="{{ 'active' if active == 'dashboard' else '' }}" href="{{ url_for('dashboard') }}">▦ <span>Painel</span></a>
+                <a class="{{ 'active' if active == 'produtos' else '' }}" href="{{ url_for('produtos') }}">◇ <span>Produtos</span></a>
+                <a class="{{ 'active' if active == 'categorias' else '' }}" href="{{ url_for('categorias') }}">◇ <span>Categorias</span></a>
+                <a class="{{ 'active' if active == 'fornecedores' else '' }}" href="{{ url_for('fornecedores') }}">♧ <span>Fornecedores</span></a>
+                <a class="{{ 'active' if active == 'entrada' else '' }}" href="{{ url_for('entrada_estoque') }}">↙ <span>Entrada de estoque</span></a>
+                <a class="{{ 'active' if active == 'saida' else '' }}" href="{{ url_for('saida_estoque') }}">↗ <span>Saída de estoque</span></a>
+                <a class="{{ 'active' if active == 'movimentacoes' else '' }}" href="{{ url_for('historico_movimentacoes') }}">⇄ <span>Movimentações</span></a>
+                {% if session.get('perfil') == 'ADMINISTRADOR' %}
+                <a class="{{ 'active' if active == 'usuarios' else '' }}" href="{{ url_for('pagina_usuarios') }}">♙ <span>Usuários</span></a>
+                {% endif %}
+            </nav>
+            <div class="side-user">♙
+                <div>
+                    <strong>{{ session.get('nome', 'Usuário') }}</strong>
+                    <small>{{ 'Administrador' if session.get('perfil') == 'ADMINISTRADOR' else 'Funcionário' }}</small>
+                </div>
+                <button type="button" class="logout" data-logout title="Sair">⎋ Sair</button>
+            </div>
+        </aside>
+        <main>
+            <header>
+                <div>
+                    <h1>{{ title }}</h1>
+                    <p>{{ subtitle }}</p>
+                </div>
+                <div class="user">
+                    <b>{{ session.get('nome', 'Usuário') }}</b>
+                    <small>{{ 'Administrador' if session.get('perfil') == 'ADMINISTRADOR' else 'Funcionário' }}</small>
+                </div>
+            </header>
+            <section class="content">
+{% endmacro %}{% macro end_shell() %}
+            </section>
+        </main>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        <script src="{{ url_for('static', filename='js/api.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    </body>
+</html>
+{% endmacro %}

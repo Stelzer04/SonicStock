@@ -1,0 +1,28 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('fornecedores', 'Fornecedores', 'Gerencie os fornecedores dos seus produtos') }}
+<div class="toolbar">
+    <input class="search" placeholder="⌕  Buscar fornecedores..." data-search>
+    <button class="btn" type="button" id="btn-novo-fornecedor">＋ Adicionar Fornecedor</button>
+</div>
+<section class="panel table-panel">
+    <table>
+        <thead><tr><th>Nome do fornecedor</th><th>CNPJ</th><th>Telefone</th><th>E-mail</th><th>Produtos</th><th>Ações</th></tr></thead>
+        <tbody id="supplier-rows"><tr><td colspan="6" class="muted">Carregando...</td></tr></tbody>
+    </table>
+</section>
+
+<dialog class="dlg" id="supplier-dialog">
+    <form id="supplier-form" method="dialog">
+        <h2 id="supplier-dialog-title">Novo fornecedor</h2>
+        <input type="hidden" name="id">
+        <label>Nome *<input name="nome" required maxlength="255"></label>
+        <label>CNPJ<input name="cnpj" maxlength="18" placeholder="00.000.000/0000-00"></label>
+        <label>Telefone<input name="telefone" maxlength="20"></label>
+        <label>E-mail<input name="email" type="email" maxlength="255"></label>
+        <div class="dlg-actions">
+            <button type="button" class="secondary" data-close-dialog>Cancelar</button>
+            <button class="btn">Salvar</button>
+        </div>
+    </form>
+</dialog>
+{{ end_shell() }}

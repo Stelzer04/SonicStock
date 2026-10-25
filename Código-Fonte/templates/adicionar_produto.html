@@ -1,0 +1,25 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('produtos', 'Editar produto' if produto_id else 'Adicionar produto', 'Altere os dados do item' if produto_id else 'Cadastre um novo item no estoque') }}
+<form class="panel product-form" id="product-form" data-id="{{ produto_id or '' }}">
+    <div class="panel-heading">
+        <div><h2>Informações do produto</h2><p>Preencha os campos para {{ 'atualizar o' if produto_id else 'adicionar um' }} produto {{ '' if produto_id else 'ao catálogo' }}.</p></div>
+        <small>* Campos obrigatórios</small>
+    </div>
+    <div class="form-grid">
+        <label>Código do produto *<input required name="codigo" maxlength="50" placeholder="Ex.: PRD-009"></label>
+        <label>Nome do produto *<input required name="nome" maxlength="255" placeholder="Digite o nome do produto"></label>
+        <label>Categoria *<select required name="id_categoria" id="sel-categoria"><option value="">Selecione uma categoria</option></select></label>
+        <label>Fornecedor *<select required name="id_fornecedor" id="sel-fornecedor"><option value="">Selecione um fornecedor</option></select></label>
+        <label>Preço unitário (R$) *<input required type="number" min="0" step=".01" name="preco" placeholder="0,00"></label>
+        <label>{{ 'Quantidade atual' if produto_id else 'Quantidade inicial *' }}<input {{ 'disabled' if produto_id else 'required' }} type="number" min="0" step="1" name="quantidade" placeholder="0">{% if produto_id %}<small class="muted">Altere o saldo em Entrada/Saída de estoque.</small>{% endif %}</label>
+        <label>Estoque mínimo *<input required type="number" min="0" step="1" name="estoque_minimo" placeholder="0"></label>
+        <label class="span">Descrição<textarea rows="4" name="descricao" maxlength="1000" placeholder="Detalhes adicionais (opcional)"></textarea></label>
+    </div>
+    <div class="form-actions">
+        <a class="secondary" href="{{ url_for('produtos') }}">Cancelar</a>
+        {% if not produto_id %}<button type="reset" class="secondary">Limpar campos</button>{% endif %}
+        <button class="btn">Salvar produto</button>
+    </div>
+    <p id="product-message" class="muted"></p>
+</form>
+{{ end_shell() }}

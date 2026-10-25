@@ -1,0 +1,27 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('movimentacoes', 'Movimentações de Estoque', 'Consulte as entradas e saídas registradas') }}
+<div class="stats three">
+    <article><span>Entradas</span><strong id="count-in">—</strong><small>Conforme os filtros</small></article>
+    <article><span>Saídas</span><strong id="count-out">—</strong><small>Conforme os filtros</small></article>
+    <article><span>Registros exibidos</span><strong id="movement-count">—</strong><small>Últimas 500 movimentações</small></article>
+</div>
+<div class="toolbar">
+    <input class="search" id="movement-search" placeholder="⌕  Buscar por produto ou responsável...">
+    <select id="movement-type">
+        <option value="TODOS">Todos os tipos</option>
+        <option value="ENTRADA">Entrada</option>
+        <option value="SAIDA">Saída</option>
+    </select>
+    <div class="actions">
+        <a class="btn" href="{{ url_for('entrada_estoque') }}">＋ Entrada</a>
+        <a class="btn" href="{{ url_for('saida_estoque') }}">− Saída</a>
+    </div>
+</div>
+<section class="panel table-panel">
+    <table>
+        <thead><tr><th>Código</th><th>Produto</th><th>Tipo</th><th>Quantidade</th><th>Data e horário</th><th>Responsável</th><th>Observação</th></tr></thead>
+        <tbody id="movements-table"><tr><td colspan="7" class="muted">Carregando...</td></tr></tbody>
+    </table>
+    <p class="muted" id="movement-visible-count"></p>
+</section>
+{{ end_shell() }}

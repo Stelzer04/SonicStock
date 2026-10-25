@@ -1,0 +1,21 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('categorias', 'Categorias', 'Organize os produtos por categoria') }}
+<div class="toolbar">
+    <input class="search" placeholder="⌕  Buscar categorias..." data-search>
+    <button class="btn" type="button" id="btn-nova-categoria">＋ Adicionar Categoria</button>
+</div>
+<div class="category-grid" id="category-grid"><p class="muted">Carregando...</p></div>
+
+<dialog class="dlg" id="category-dialog">
+    <form id="category-form" method="dialog">
+        <h2 id="category-dialog-title">Nova categoria</h2>
+        <input type="hidden" name="id">
+        <label>Nome *<input name="nome" required maxlength="255"></label>
+        <label>Descrição<textarea name="descricao" rows="3" maxlength="500"></textarea></label>
+        <div class="dlg-actions">
+            <button type="button" class="secondary" data-close-dialog>Cancelar</button>
+            <button class="btn">Salvar</button>
+        </div>
+    </form>
+</dialog>
+{{ end_shell() }}

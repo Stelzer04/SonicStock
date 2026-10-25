@@ -1,0 +1,27 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('dashboard', 'Painel', 'Visão geral do seu estoque') }}
+<div class="stats" id="dash-stats">
+    <article><span>Total de produtos</span><strong id="stat-produtos">—</strong><small>Produtos cadastrados</small></article>
+    <article><span>Fornecedores</span><strong id="stat-fornecedores">—</strong><small>Fornecedores cadastrados</small></article>
+    <article><span>Estoque baixo</span><strong id="stat-baixo">—</strong><small class="orange">Precisam de atenção</small></article>
+    <article><span>Movimentações hoje</span><strong id="stat-mov">—</strong><small>Entradas e saídas</small></article>
+</div>
+<div class="columns">
+    <section class="panel">
+        <h2>Produtos com estoque baixo</h2>
+        <p>Produtos que atingiram o estoque mínimo</p>
+        <table>
+            <thead><tr><th>Produto</th><th>Categoria</th><th>Quantidade</th><th>Status</th></tr></thead>
+            <tbody id="low-stock-rows"><tr><td colspan="4" class="muted">Carregando...</td></tr></tbody>
+        </table>
+    </section>
+    <section class="panel">
+        <h2>Ações rápidas</h2>
+        <a class="quick" href="{{ url_for('adicionar_produto') }}">＋　Adicionar produto　→</a>
+        <a class="quick" href="{{ url_for('entrada_estoque') }}">↙　Registrar entrada　→</a>
+        <a class="quick" href="{{ url_for('saida_estoque') }}">↗　Registrar saída　→</a>
+        <a class="quick" href="{{ url_for('fornecedores') }}">♧　Gerenciar fornecedores　→</a>
+        <a class="quick" href="{{ url_for('categorias') }}">◇　Ver categorias　→</a>
+    </section>
+</div>
+{{ end_shell() }}

@@ -1,0 +1,24 @@
+{% from "_layout.html" import shell, end_shell %}
+{{ shell('saida', 'Saída de estoque', 'Registre retiradas e confira a disponibilidade antes de confirmar') }}
+<div class="stats two">
+    <article><span>Produto selecionado</span><strong class="stat-text" id="exit-product-stat">Nenhum</strong><small>Selecione um produto no formulário</small></article>
+    <article><span>Saldo após saída</span><strong id="exit-total-stat">—</strong><small>O servidor confere o saldo real ao confirmar</small></article>
+</div>
+<form class="panel product-form" id="stock-exit-form">
+    <div class="panel-heading">
+        <div><h2>Dados da saída</h2><p>Informe o produto e a quantidade a retirar.</p></div>
+        <small>* Campos obrigatórios</small>
+    </div>
+    <div class="form-grid">
+        <label class="span">Produto *<select required id="exit-product"><option value="">Selecione um produto</option></select></label>
+        <label>Quantidade de saída *<input required id="exit-quantity" type="number" min="1" step="1" placeholder="Ex.: 2"></label>
+        <label>Quantidade disponível<input id="exit-available" type="text" value="Selecione um produto" disabled></label>
+        <label class="span">Observação<textarea rows="3" id="exit-notes" maxlength="500" placeholder="Ex.: Material entregue ao setor de suporte (opcional)"></textarea></label>
+    </div>
+    <div class="form-actions">
+        <a class="secondary" href="{{ url_for('historico_movimentacoes') }}">Ver histórico</a>
+        <button type="reset" class="secondary">Limpar campos</button>
+        <button class="btn" type="submit">− Confirmar saída</button>
+    </div>
+</form>
+{{ end_shell() }}
